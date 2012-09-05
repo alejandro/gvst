@@ -1,0 +1,18 @@
+{
+  "name": "jsquiz-end",
+  "description": "a thing that blams the o's",
+  "version": "1.0.0",
+  "keywords": ['blamo', 'ender'],
+  "homepage": "http://example.com",
+  "authors": ["Alejandro Morales"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fake-account/blamo.git"
+  },
+  "dependencies": {
+    "backbone": "*",
+    "jeesh":"*"
+  },
+  "main": "./src/project/blamo.js",
+  "ender": "./src/exports/ender.js"
+}
