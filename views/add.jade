@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+
+  form(action="action", method="POST")
+    input(type="text", name="title", value="title", placeholder="title")
+    input(type="text", name="description", value="title", placeholder="description")
+
+block scripts
+  script(src="/javascripts/ender.min.js", type="text/javascript")

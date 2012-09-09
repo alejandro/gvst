@@ -43,9 +43,15 @@
 
 */
 
+!function (name, definition) {
+  if (typeof module != 'undefined') module.exports = definition()
+  else if (typeof define == 'function' && define.amd) define(name, definition)
+  else if (this.provide) this.provide(name, definition())
+  else this[name] = definition()
+}('state', function () {
 
 function State (opts) {
-    this.maxSize = opts.maxSize || 40 // Default to 40 states
+    this.maxSize = opts.maxSize || Infinity
     this.interval = opts.interval || 1
     this.range = {
         prev: [],
@@ -68,6 +74,7 @@ State.prototype.next = function (wat){
         this.range.prev.push(this.range.current)
     }
     var next = wat
+    console.log(wat)
     if (!next && this.length) {
         next = this.shift()
     } else if (wat) { 
@@ -93,7 +100,7 @@ State.prototype.previous = function (wat) {
     var prev = wat
     if (!prev && this.range.prev.length) {
         prev = this.range.prev.pop()
-    } else if (wat) { 
+    } else if (wat) {
         this.range.prev.push(wat)
     } else {
         throw new Error('Begin of stack reached')
@@ -105,7 +112,10 @@ State.prototype.previous = function (wat) {
 }
 
 State.prototype.init = function () {
-    return this.next()
+    try {
+        return this.next()
+    } catch (e) {}
+    
 }
 
 State.prototype.on = function(events, callback, context) {
@@ -152,31 +162,32 @@ State.prototype.emit = function(events) {
 }
 
 
+
 /* TEST*/
 
 // var st = new State({maxSize:5, interval:1})
 
-// st.push('first try')
-// st.push('second try')
-// st.push({
-//     title:'Named arg',
-//     prev: 'asda'
-// })
+// // st.push('first try')
+// // st.push('second try')
+// // st.push({
+// //     title:'Named arg',
+// //     prev: 'asda'
+// // })
 
-// st.push([{
-//     title: 'ionded'
-// }])
-// st.push(+new Date)
+// // st.push([{
+// //     title: 'ionded'
+// // }])
+// // st.push(+new Date)
 
 // st.on('change', function(current){
 //     console.log(current)
 // })
+// st.next({ test: 1})
+// console.log(st.range)
 // st.next()
 // // console.log(st.range)
 // st.next()
-// // console.log(st.range)
-// st.next()
-// // console.log(st.range)
+//  console.log(st.range)
 // st.next()
 // // console.log(st.range)
 // st.next()
@@ -185,3 +196,5 @@ State.prototype.emit = function(events) {
 // console.log(st.range)
 // st.prev()
 // console.log(st.range)
+return State
+})

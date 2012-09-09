@@ -2,9 +2,16 @@ extends layout
 
 block content
   h1= title
-  p Iniciar to #{title}
+
+  #space.quiz-area
+    p Loading ...
 
 block scripts
   script(src="/javascripts/ender.min.js", type="text/javascript")
   script(src="/javascripts/jquery.min.js",type="text/javascript")
+  script(src="/javascripts/stateHandler.js", type="text/javascript")
+  script(src="/javascripts/events.js", type="text/javascript")
   script(src="/javascripts/app.js",type="text/javascript")
+
+block templates
+  include templates

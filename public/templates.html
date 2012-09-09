@@ -1,0 +1,23 @@
+<script type="text/html" id="home-tmpl">
+    <h1> Bienvenido <%= name %>al JavaScript y Node Quiz </h1>
+    <p> En el aprenderas y reforzaras tu conocimiento de JavaScript en general</p>
+    <p> Disfrutelo</p>
+<script>
+<script type="text/html" id="question-tmpl">
+    <h4><%= title %></h4>
+    <p><%= description %></p>
+    <section class="question" data-no="<%= id %>"><%= body %></section>
+    <ul>
+    <% _.each(answers, function(item) { %> 
+        <li data-value="<%= item.value %>">
+            <%= item.text %>
+        </li> 
+    <% }); %>
+    </ul>
+    <ul><%= suggestion %></ul>
+</script>
+<script type="text/html" id="answer-tmpl">
+    <h4><%= title %></h4>
+    <p><%= correct %></p>
+    <p><%= info %></p>
+</script>

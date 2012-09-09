@@ -1,0 +1,27 @@
+script(type="text/html", id="home-tmpl")
+    <h1> Bienvenido <%= name %>al JavaScript y Node Quiz </h1>
+    <p> En el aprenderas y reforzaras tu conocimiento de JavaScript en general</p>
+    <p> Disfrutelo</p>
+script(type="text/html", id="question-tmpl")
+    <div id="question" data-next="<%= id + 1 %>">
+    <h4><%= title %></h4>
+    <p><%= description %></p>
+    <section class="question" data-no="<%= id %>"><%= body %></section>
+    <ul>
+    <% _.each(answers, function(item) { %> 
+    <li data-value="<%= item.value %>">
+    <%= item.text %>
+    </li> 
+    <% }); %>
+    </ul>
+    <div class="buttons">
+    <button id="prev"> anterior </button>
+    <button id="send"> enviar </button>
+    <button id="next">siguiente</button>
+    </div>
+    <ul><%= suggestion %></ul>
+    </div>
+script(type="text/html", id="answer-tmpl")
+    <h4><%= title %></h4>
+    <p><%= correct %></p>
+    <p><%= info %></p>
