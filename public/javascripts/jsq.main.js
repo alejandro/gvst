@@ -32,10 +32,10 @@ function JSQuiz(options) {
     this.$space = this.$('#space')
     this.header = '[Quiz]'
     this.State = new State({})
-    this.State.on('change', function (question) {
+    this.State.on('change', function (question, id) {
         question = _.isArray(question) ? question : [question]
         self._questions = question
-        self.emit('q:render')
+        self.emit('q:render', id)
     })
     window.State = this.State
 }

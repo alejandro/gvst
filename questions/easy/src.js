@@ -5,7 +5,7 @@ var questions = [{
     id: 1,  
     description: 'Simple questions',
     title: 'Closure and compilers',
-    body: "<%= snippet1.js %>",
+    body: "<%= snippet2.js %>",
     answers: [{
         text: 'Los',
         value: 100
@@ -21,7 +21,7 @@ var questions = [{
     id: 1,  
     description: 'Simple questions',
     title: 'not a Closure nor a compiler',
-    body: "<%= snippet2.js %>",
+    body: "<%= snippet1.js %>",
     answers: [{
         text: 'Los Alejandros',
         value: 100

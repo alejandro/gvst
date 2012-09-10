@@ -3,17 +3,20 @@ script(type="text/html", id="home-tmpl")
     <p> En el aprenderas y reforzaras tu conocimiento de JavaScript en general</p>
     <p> Disfrutelo</p>
 script(type="text/html", id="question-tmpl")
-    <div id="question" data-next="<%= id + 1 %>">
+    <div id="question" data-next="<%= id + 1 %>" data-sid="<%= sid %>">
     <h4><%= title %></h4>
     <p><%= description %></p>
     <section class="question" data-no="<%= id %>"><%= body %></section>
-    <ul>
-    <% _.each(answers, function(item) { %> 
-    <li data-value="<%= item.value %>">
-    <%= item.text %>
-    </li> 
-    <% }); %>
-    </ul>
+    <div name="choices">
+    <% _.each(answers, function(item, index) { %> 
+    <label data-id="<%= index %>"><%= item.text %>
+    </label>
+    <% if (!item.checked || item.checked == false) { %>
+    <input type="radio" name="answers" data-value="<%= item.value %>">
+    <% } else {  %>
+    <input type="radio" name="answers" data-value="<%= item.value %>" checked>   
+    <% }}); %>
+    </optgroup>
     <div class="buttons">
     <button id="prev"> anterior </button>
     <button id="send"> enviar </button>

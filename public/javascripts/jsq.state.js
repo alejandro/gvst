@@ -79,7 +79,7 @@
             next  = this.shift()
         }
         this.push(next)
-        this.emit('change', this.cache[next])
+        this.emit('change', this.cache[next], next)
         return this.cache[next]
     }
 
@@ -94,6 +94,9 @@
     State.prototype.get = function (id) {
         return this.cache[id] || {}
     }
+    State.prototype.__defineGetter__('all', function(){
+        return this.cache
+    })
 
     State.prototype.prev = function(id, wat){
         var prev, bk
@@ -107,11 +110,11 @@
         }
         bk = this.splice(0)
         var newa = [prev].concat(bk)
-        if (bk.indexOf(prev)) {
+        if (bk.indexOf(prev) > -1) {
             newa = bk
         }
         this.push.apply(this, newa)
-        this.emit('change', this.cache[prev])
+        this.emit('change', this.cache[prev], prev)
         return this.cache[prev]
     }
 

@@ -19,6 +19,10 @@ exports.question = {
     },
     prev: function(req, res){
 
+    },
+    check: function (req, res) {
+        console.log(req.body)
+        res.json({status: 'ok'})
     }
 
 }

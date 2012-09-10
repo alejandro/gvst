@@ -30,6 +30,7 @@ app.configure('development', function(){
 app.get('/', routes.index);
 
 app.get('/api/v1/:level/question/:id.json', routes.question.next)
+app.post('/api/v1/:level/answers', routes.question.check)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
