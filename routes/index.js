@@ -26,7 +26,7 @@ exports.question = {
 function load() {
     var dir = fs.readdirSync(__dirname + '/../questions')
     dir.forEach(function(folder){
-        questions[folder] = require(__dirname + '/../questions/' + folder + '/questions')
+        questions[folder] = require(__dirname + '/../questions/' + folder + '/')
     })
 }
 
