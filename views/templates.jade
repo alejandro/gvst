@@ -9,13 +9,14 @@ script(type="text/html", id="question-tmpl")
     <section class="question" data-no="<%= id %>"><%= body %></section>
     <div name="choices">
     <% _.each(answers, function(item, index) { %> 
-    <label data-id="<%= index %>"><%= item.text %>
-    </label>
     <% if (!item.checked || item.checked == false) { %>
-    <input type="radio" name="answers" data-value="<%= item.value %>">
+    <section class="choice"><input type="radio" name="answers" data-value="<%= item.value %>">
     <% } else {  %>
     <input type="radio" name="answers" data-value="<%= item.value %>" checked>   
-    <% }}); %>
+    <% } %>
+    <label data-id="<%= index %>"><%= item.text %>
+    </label></section>
+    <% }); %>
     </optgroup>
     <div class="buttons">
     <button id="prev"> anterior </button>

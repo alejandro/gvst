@@ -1,17 +1,20 @@
 extends layout
 
 block content
-  h1= title
-
+  header 
+    img(src="https://raw.github.com/voodootikigod/logo.js/master/js.png", heigth="38px",width="38px")
+    h1.title= title
   #space.quiz-area
     p Loading ...
 
 block scripts
   script(src="/javascripts/ender.min.js", type="text/javascript")
   script(src="/javascripts/jquery.min.js",type="text/javascript")
-  script(src="/javascripts/jsq.state.js", type="text/javascript")
-  script(src="/javascripts/jsq.events.js", type="text/javascript")
-  script(src="/javascripts/jsq.main.js",type="text/javascript")
+  script(src="/javascripts/jsquiz-0.0.1.min.js", type="text/javascript")
+  //- script(src="/javascripts/jsq.state.js", type="text/javascript")
+  //- script(src="/javascripts/jsq.events.js", type="text/javascript")
+  //- script(src="/javascripts/jsq.main.js",type="text/javascript")
+  script(src="/javascripts/prism.js",type="text/javascript")
 
 block templates
   include templates

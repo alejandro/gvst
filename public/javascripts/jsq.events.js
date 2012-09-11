@@ -41,7 +41,7 @@
 
     function fixAnswers (sid){
         var current = this.State.get(sid)
-           , answer = this.$('#question [name="answers"]:checked').prev()
+           , answer = this.$('#question [name="answers"]:checked').next()
         if (answer.data() !== null) {
             var id = answer.data().id
             current.answer = id
@@ -58,7 +58,6 @@
         event.preventDefault()
         var target = event.target
           , data = this.active.dataset
-
         this.qnext = data.next
         fixAnswers.call(this, data.sid)
         this.fetchQuestions(data.next)
@@ -67,11 +66,15 @@
     function qrender(id) {
         var s = this
         s._questions[0].sid = id || 0
+        if (!s._questions[0].id) return
         s.$space.html(s.qtemplate(s._questions[0]))
         s.active = s.$('#question')[0]
         s.$('#prev').bind('click', s.emit.bind(s, 'ui:button:prev'));
         s.$('#send').bind('click', s.emit.bind(s, 'ui:button:send'));
         s.$('#next').bind('click', s.emit.bind(s, 'ui:button:next'));
+        if (window.Prism) {
+            Prism.highlightAll()
+        }
     }
 
     function ready(time) {

@@ -3,7 +3,7 @@
 // License: MIT/X11 
 // Copyright (c) 2012 Alejandro Morales <vamg008@gmail.com> 
 
-//(function () { // -> Silly stuff <-
+(function () { // -> Silly stuff <-
 
 "use strict";
 
@@ -182,4 +182,4 @@ $(document).ready(function (){
     }).init()
 })
 
-//}).call(this)
+}).call(this)

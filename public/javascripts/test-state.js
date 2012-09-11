@@ -1,7 +1,6 @@
 var State = require('./jsq.state')
   , assert = require('assert')
 
-
 var localState = new State({maxSize: 100})
 
 

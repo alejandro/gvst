@@ -6,7 +6,7 @@ var fs = require('fs')
   , questions = {}
 
 exports.index = function(req, res){
-  res.render('index', { title: 'JSQuiz' })
+  res.render('index', { title: 'Quiz' })
 }
 
 exports.question = {

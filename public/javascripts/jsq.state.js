@@ -1,20 +1,13 @@
 !function (name, definition) {
-  if (this.provide) this.provide(name, definition())
+  if (typeof module != 'undefined') module.exports = definition()
+  else if (typeof define == 'function' && define.amd) define(name, definition)
+  else if (this.provide) this.provide(name, definition())
   else this[name] = definition()
 }('state', function () {
 
     function State (options) {
         var s = this;
-        s.__defineGetter__('maxSize', function (){
-            return options.maxSize || Infinity
-        })
-        s.__defineGetter__('interval', function () {
-            return options.interval || 1
-        })
-
-        s.__defineGetter__('range', function(){
-            return this._range || {}
-        })
+        this.options = options
         s.cache = {}
     }
 
@@ -94,9 +87,7 @@
     State.prototype.get = function (id) {
         return this.cache[id] || {}
     }
-    State.prototype.__defineGetter__('all', function(){
-        return this.cache
-    })
+
 
     State.prototype.prev = function(id, wat){
         var prev, bk
@@ -166,6 +157,24 @@
         }
         return this;
     }
+
+    Object.defineProperties(State.prototype, {
+        'maxSize': {
+            get: function () { 
+                return this.options.maxSize || Infinity
+            }
+        },
+        'interval': {
+            get: function () {
+                return this.options.interval || 1
+            }
+        },
+        'all':{
+            get: function (){
+                return this.cache            
+            }
+        }
+    })
 
     return State
 })

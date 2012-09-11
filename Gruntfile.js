@@ -11,21 +11,22 @@ module.exports = function(grunt) {
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     lint: {
-      files: ['Gruntfile.js', 'lib/**/*.js', 'test/**/*.js']
+      files: ['Gruntfile.js', 'public/**/*.js']
     },
     qunit: {
       files: ['test/**/*.html']
     },
     concat: {
       dist: {
-        src: ['<file_strip_banner:lib/<%= pkg.name %>.js>'],
-        dest: 'dist/<%= pkg.name %>.js'
+        src: ['public/javascripts/jsq.state.js', 'public/javascripts/jsq.events.js','public/javascripts/jsq.main.js'],
+        dest: 'public/javascripts/jsquiz-<%= pkg.version %>.js',
+        separator: ';'
       }
     },
     min: {
       dist: {
         src: ['<config:concat.dist.dest>'],
-        dest: 'dist/<%= pkg.name %>.min.js'
+        dest: 'public/javascripts/jsquiz-<%= pkg.version %>.min.js'
       }
     },
     watch: {
@@ -61,11 +62,12 @@ module.exports = function(grunt) {
         match = match.trim()
         var file = '\nNOT FOUND\n'
         try {
-            file = fs.readFileSync('./questions/easy/' + match, 'utf8')
+            file = fs.readFileSync('./questions/easy/code/' + match, 'utf8')
         } catch (ex) {
           console.log('FILE DOESNT EXISTS')
         }
-        return '<pre><code>' + file.split('\n').join('\\n') + '</code></pre>'
+        return '<pre data-src=\\"prism.js\\"><code class=\\"language-javascript\\">' +
+               file.split('\n').join('\\n').replace(/"|'/g, '\\"') + '</code></pre>'
       })
       return fs.writeFileSync('./questions/' + level + '/index.js', src, 'utf8')
     }
